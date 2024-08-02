@@ -1,0 +1,5 @@
+[profile.default]
+src = "contracts/src"
+test = "contracts/test"
+out = "out"
+libs = ["lib"]
