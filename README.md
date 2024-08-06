@@ -4,7 +4,7 @@ Blockchain learning game
 
 ## Overview
 
-Greed Island is a blockchain educational game with play-to-earn mechanics. Built on the Lisk blockchain, Greed Island aims to make smart contract development accessible and engaging for everyone.
+Greed Island is a blockchain educational game with play-to-earn mechanics that aims to make blockchain and smart contract development accessible and engaging for everyone.
 
 ## Key Features
 
