@@ -18,7 +18,7 @@ Greed Island is a blockchain educational game with play-to-earn mechanics that a
 
 ## Technology Stack
 
-- Blockchain: Lisk
+- Blockchain: EVM compatible, layer 2
 - Smart Contracts: Solidity, Foundry
 - Frontend: ReactJS, PhaserJS, Web3 libraries, ChatGPT
 - Backend: NodeJS, MongoDB, Blockscout
