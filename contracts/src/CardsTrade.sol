@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract CardsTrade is Ownable, ERC721Holder, ReentrancyGuard {
     event TradeStatusChange(uint256 indexed tradeId, bytes32 status);
@@ -41,7 +41,7 @@ contract CardsTrade is Ownable, ERC721Holder, ReentrancyGuard {
     /// @notice Initializes the CardsTrade contract
     /// @param _jenisTokenAddress The address of the ERC20 token used for trades
     /// @param _itemTokenAddress The address of the ERC721 token being traded
-    constructor(address _jenisTokenAddress, address _itemTokenAddress) Ownable() {
+    constructor(address _jenisTokenAddress, address _itemTokenAddress) Ownable(msg.sender) {
         jenisToken = IERC20(_jenisTokenAddress);
         itemToken = IERC721(_itemTokenAddress);
     }

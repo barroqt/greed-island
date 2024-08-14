@@ -2,9 +2,9 @@
 pragma solidity ^0.8.23;
 
 import "forge-std/Script.sol";
-import "../JenisERC20.sol";
-import "../CardERC721.sol";
-import "../CardsTrade.sol";
+import "../src/JenisERC20.sol";
+import "../src/CardERC721.sol";
+import "../src/CardsTrade.sol";
 
 contract DeployContracts is Script {
     function run() external {
