@@ -8,11 +8,13 @@ contracts/broadcast/*/31337/
 contracts/broadcast/**/dry-run/
 
 # Dotenv file
+contracts/.env
+backend/.env
+frontend/.env
 .env
 
 # Node.js
 backend/node_modules/
-.env
 
 # React
 frontend/build/
