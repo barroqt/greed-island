@@ -18,3 +18,6 @@ backend/node_modules/
 
 # React
 frontend/build/
+
+*/node_modules/*
+*/.DS_Store
