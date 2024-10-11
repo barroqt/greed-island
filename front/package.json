@@ -2,6 +2,7 @@
   "name": "greedisland",
   "version": "0.0.1",
   "private": true,
+  "homepage": "/greed_island/",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@tanstack/react-query": "^5.51.23",
