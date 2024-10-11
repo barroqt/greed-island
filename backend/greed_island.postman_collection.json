@@ -1,0 +1,396 @@
+{
+  "info": {
+    "_postman_id": "unique-id-here",
+    "name": "Greed Island API",
+    "description": "API endpoints for the Greed Island game application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "Create Player",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"address\": \"0x1234567890123456789012345678901234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/players",
+              "host": ["{{base_url}}"],
+              "path": ["players"]
+            }
+          }
+        },
+        {
+          "name": "Get Player",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/players/:id",
+              "host": ["{{base_url}}"],
+              "path": ["players", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "player-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Player",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"address\": \"0x0987654321098765432109876543210987654321\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/players/:id",
+              "host": ["{{base_url}}"],
+              "path": ["players", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "player-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Player",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/players/:id",
+              "host": ["{{base_url}}"],
+              "path": ["players", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "player-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Item to Inventory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"itemId\": \"item-id-here\",\n    \"quantity\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/players/:id/inventory",
+              "host": ["{{base_url}}"],
+              "path": ["players", ":id", "inventory"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "player-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Item from Inventory",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"quantity\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/players/:id/inventory/:itemId",
+              "host": ["{{base_url}}"],
+              "path": ["players", ":id", "inventory", ":itemId"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "player-id-here"
+                },
+                {
+                  "key": "itemId",
+                  "value": "item-id-here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quests",
+      "item": [
+        {
+          "name": "Create Quest",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Defeat the Dragon\",\n    \"playerId\": \"player-id-here\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/quests",
+              "host": ["{{base_url}}"],
+              "path": ["quests"]
+            }
+          }
+        },
+        {
+          "name": "Get Quest",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/quests/:id",
+              "host": ["{{base_url}}"],
+              "path": ["quests", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quest-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quests by Player",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/quests/player/:playerId",
+              "host": ["{{base_url}}"],
+              "path": ["quests", "player", ":playerId"],
+              "variable": [
+                {
+                  "key": "playerId",
+                  "value": "player-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Quest",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Quest Name\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/quests/:id",
+              "host": ["{{base_url}}"],
+              "path": ["quests", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quest-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Quest",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/quests/:id",
+              "host": ["{{base_url}}"],
+              "path": ["quests", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quest-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Complete Quest",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/quests/:id/complete",
+              "host": ["{{base_url}}"],
+              "path": ["quests", ":id", "complete"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quest-id-here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "Create Item",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Magic Sword\",\n    \"description\": \"A powerful magical sword\",\n    \"type\": \"WEAPON\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/items",
+              "host": ["{{base_url}}"],
+              "path": ["items"]
+            }
+          }
+        },
+        {
+          "name": "Get Item",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/items/:id",
+              "host": ["{{base_url}}"],
+              "path": ["items", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "item-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Items by Type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/items/type/:type",
+              "host": ["{{base_url}}"],
+              "path": ["items", "type", ":type"],
+              "variable": [
+                {
+                  "key": "type",
+                  "value": "WEAPON"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Item",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Item Name\",\n    \"description\": \"Updated description\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/items/:id",
+              "host": ["{{base_url}}"],
+              "path": ["items", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "item-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/items/:id",
+              "host": ["{{base_url}}"],
+              "path": ["items", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "item-id-here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

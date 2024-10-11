@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id        String          @id @default(uuid())
+  address   String          @unique
+  inventory InventoryItem[]
+  quests    Quest[]
+}
+
+model InventoryItem {
+  id       String   @id @default(uuid())
+  itemId   String
+  quantity Int
+  player   Player   @relation(fields: [playerId], references: [id])
+  playerId String
+  item     Item     @relation(fields: [itemId], references: [id])
+}
+
+model Item {
+  id            String          @id @default(uuid())
+  name          String
+  description   String?
+  type          ItemType
+  inventoryItems InventoryItem[]
+}
+
+enum ItemType {
+  CARD
+  ARMOR
+  CONSUMABLE
+}
+
+model Quest {
+  id        String   @id @default(uuid())
+  name      String
+  completed Boolean  @default(false)
+  player    Player   @relation(fields: [playerId], references: [id])
+  playerId  String
+}
