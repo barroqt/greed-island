@@ -1,6 +1,8 @@
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { specs } from "./swaggerConfig";
 import playerRoutes from "./routes/playerRoutes";
 import questRoutes from "./routes/questRoutes";
 import itemRoutes from "./routes/itemRoutes";
@@ -13,20 +15,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 app.use(helmet());
 app.use(cors());
-app.use(express.json()); // Add this line to parse JSON bodies
+app.use(express.json());
 
-console.log("Server setup started");
 // Routes
-console.log("Registering player routes");
 app.use("/api/players", playerRoutes);
-console.log("Registering quest routes");
 app.use("/api/quests", questRoutes);
-console.log("Registering item routes");
 app.use("/api/items", itemRoutes);
-
-console.log("Routes registered");
 
 app.use(errorHandler.handleErrors);
 app.use(errorHandler.handle404);
@@ -34,6 +32,7 @@ app.use(errorHandler.handle404);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`);
 });
 
 export default app;

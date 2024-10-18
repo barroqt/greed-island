@@ -72,30 +72,12 @@ The collection uses an optionnal variable `{{base_url}}` set to `http://localhos
 - Go to the "Variables" tab
 - Update the "CURRENT VALUE" of `base_url`
 
-## Available Endpoints
+---
 
-### Players
+# Swagger API Documentation
 
-- Create Player
-- Get Player
-- Update Player
-- Delete Player
-- Add Item to Inventory
-- Remove Item from Inventory
+After starting the server, you can access the Swagger UI at:
 
-### Quests
-
-- Create Quest
-- Get Quest
-- Get Quests by Player
-- Update Quest
-- Delete Quest
-- Complete Quest
-
-### Items
-
-- Create Item
-- Get Item
-- Get Items by Type
-- Update Item
-- Delete Item
+```text
+http://localhost:3000/api-docs
+```
