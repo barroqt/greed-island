@@ -5,7 +5,6 @@ export const playerController = {
   create: async (req: Request, res: Response) => {
     try {
       const { address } = req.body;
-      console.log(`[IN CONTROLLER] address: ${address}`);
       const player = await playerService.create(address);
       res.status(201).json(player);
     } catch (error) {
@@ -24,6 +23,20 @@ export const playerController = {
       }
     } catch (error) {
       console.error(error);
+      res.status(500).json({ error: "Failed to retrieve player" });
+    }
+  },
+
+  findByAddress: async (req: Request, res: Response) => {
+    try {
+      const { address } = req.params;
+      const player = await playerService.findByAddress(address);
+      if (player) {
+        res.json(player);
+      } else {
+        res.status(404).json({ error: "Player not found" });
+      }
+    } catch (error) {
       res.status(500).json({ error: "Failed to retrieve player" });
     }
   },
