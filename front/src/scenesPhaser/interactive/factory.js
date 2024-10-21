@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
 
-import {Sign} from "./sign.js";
-import {Door} from "./door.js"
-import {Player} from "./player.js";
+import { Sign } from "./sign.js";
+import { Door } from "./door.js"
+import { Player } from "./player.js";
 
 // To be able to do scene.add.sign(...)
 Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text, direction) {
@@ -10,8 +10,8 @@ Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text, dire
 })
 
 // To be able to do scene.add.door(...)
-Phaser.GameObjects.GameObjectFactory.register('door', function (x, y, width, height, destination, link) {
-	return new Door(this.scene, x, y, width, height, destination, link);
+Phaser.GameObjects.GameObjectFactory.register('door', function (x, y, width, height, destination, callback) {
+	return new Door(this.scene, x, y, width, height, destination, callback);
 })
 
 // To be able to do scene.add.player(...)

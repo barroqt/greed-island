@@ -51,8 +51,10 @@ function NavBar(props: NavBarType) {
       <div style={styles.headerContainer}>
         <span style={{ display: "flex", flexDirection: 'column', textAlign: 'left', lineHeight: '15px' }}>
           <Title style={{ color: 'white', margin: '5px', fontSize: '13px', textShadow: '1px 1px #7b4b00', fontStyle: 'italic' }}>{props.gameTitle}</Title>
+          {/*
           <h6 style={{ marginLeft: '7px', marginBottom: '5px', color: 'white', }}>v{props.version}</h6>
           <h6 style={{ marginLeft: '7px', marginTop: '0', color: 'white', }}>Connected: {props.multiplayer}</h6>
+          */}
         </span>
         {props.isConnected && <div onClick={() => props && props.onClick && props.onClick()} style={styles.rightHeader}>
           <p className="btnBox nes-btn is-primary" style={{ padding: '0 10px' }}>

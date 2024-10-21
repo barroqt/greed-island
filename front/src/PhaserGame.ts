@@ -1,14 +1,24 @@
 import Phaser from 'phaser'
 
 import configGlobal from './config';
-import OverWorldScene from './scenes/OverWorldScene'
-import SoftwareScene from './scenes/SoftwareScene'
+import OverWorldScene from './scenesPhaser/OverWorldScene'
+import SoftwareScene from './scenesPhaser/SoftwareScene'
+import UniversityScene from './scenesPhaser/UniversityScene'
+import WelcomeScene from './scenesPhaser/WelcomeScene'
 
 declare global {
   interface Window {
     mouseOverMenu: any;
   }
 }
+
+// to update according to new maps added
+export const scenesName = [
+  'OverWorldScene',
+  'SoftwareScene',
+  'WelcomeScene',
+  'UniversityScene'
+];
 
 const config: Phaser.Types.Core.GameConfig = {
   title: configGlobal.game.name,
@@ -31,7 +41,7 @@ const config: Phaser.Types.Core.GameConfig = {
       gravity: { x: 0, y: 0 },
     },
   },
-  scene: [OverWorldScene, SoftwareScene],
+  scene: [OverWorldScene, SoftwareScene, WelcomeScene, UniversityScene],
 }
 
 const game = new Phaser.Game(config);
@@ -68,6 +78,7 @@ function resizeDPR() {
 function getWidth() {
   return (resizeDPR() ? window.innerWidth * window.devicePixelRatio : window.innerWidth)
 }
+
 function getHeight() {
   return (resizeDPR() ? window.innerHeight * window.devicePixelRatio : window.innerHeight)
 }
@@ -76,6 +87,5 @@ window.addEventListener('resize', function (event) {
   // bc otherwise we get infinite recursion (game.scale.resize emits 'resize')
   game.scale.resize(getWidth(), getHeight());
 }, false);
-
 
 export default game;

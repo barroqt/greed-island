@@ -3,8 +3,21 @@ import { shortString } from '../utils';
 
 export class BaseScene extends Phaser.Scene {
 
-  movable = false;
+  debug = false;
+  movable = true;
   timeOutSendCoord = null;
+
+  emitKeyboard(key) {
+    this.events.emit('keyboard', key);
+  }
+
+  getPlayerPosition() {
+    this.events.emit('player', this.player);
+  }
+
+  emitMap(newMap) {
+    this.events.emit('map', newMap);
+  }
 
   // --------------------------------------------------------------------------------------------------
   // CREATE
@@ -34,6 +47,8 @@ export class BaseScene extends Phaser.Scene {
 
     // Create the player and the player animations (see player.js)
     this.player = this.add.player(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
+
+    // multiplayer = { [key: playerName]: { players, map } }
     this.multiplayer = {};
     this.multiplayerNames = {};
     this.clickOnPlayer = false;
@@ -66,7 +81,14 @@ export class BaseScene extends Phaser.Scene {
     this.map.filterObjects("Objects", obj => {
       // DOORS
       if (obj.name === 'door') {
-        this.add.door(Math.round(obj.x), Math.round(obj.y), obj.width, obj.height, obj.properties[0].value, obj.properties[1].value);
+        this.add.door(
+          Math.round(obj.x),
+          Math.round(obj.y),
+          obj.width,
+          obj.height,
+          obj.properties[0].value,
+          () => this.emitMap(obj.properties[0].value),
+        );
         // last 2: destination (str) and link (bool, if true leads to a redirect)
       }
 
@@ -82,35 +104,54 @@ export class BaseScene extends Phaser.Scene {
     this.events.on('break', this.catchDoBreak, this);
     this.events.on('position', this.getPlayerPosition, this);
     this.events.on('moveanotherplayer', (arg) => this.handleMultiplayer(arg), this);
+    // arg: { previousMap: string, newMap: string }
+    this.events.on('movetomap', (arg) => {
+      this.scene.switch(arg.newMap);
+    }, this);
+    // arg: name player
     this.events.on('playerName', (arg) => this.player && this.player.setName(arg), this);
+    // arg: name player
+    this.events.on('destroyplayer', (arg) => this.destroyPlayer(arg));
+  }
+
+  createPlayer(data) {
+    this.multiplayer[data.name] = { player: null, map: '' };
+    this.multiplayer[data.name].player = this.add.player(data.pos.x, data.pos.y, "atlas", "ariel-front");
+    this.multiplayer[data.name].player.setName(data.name);
+    this.multiplayer[data.name].map = data.pos.map;
+    this.multiplayerNames[data.name] = { text: '', map: '' };
+    this.multiplayerNames[data.name].text = this.add.text(data.pos.x - 40, data.pos.y - 40, shortString(data.name));
+    this.multiplayerNames[data.name].map = data.pos.map;
+  }
+
+  destroyPlayer(name) {
+    if (debug) console.log({ destroyplayer: name });
+    this.multiplayer[name].player.destroy();
+    delete this.multiplayer[name];
+    this.multiplayerNames[name].text.destroy();
+    delete this.multiplayerNames[name];
   }
 
   handleMultiplayer(data) {
+    if (debug) console.log('handleMultiplayer');
     if (data.name && data.pos) {
       if (this.multiplayer[data.name]) {
-        //console.log('i know u');
-        this.multiplayer[data.name].changePosition(data.pos.x, data.pos.y);
-        this.multiplayerNames[data.name].setPosition(data.pos.x - 40, data.pos.y - 40);
+        if (debug) console.log('i know u');
+        this.multiplayer[data.name].player.changePosition(data.pos.x, data.pos.y);
+        this.multiplayer[data.name].map = data.pos.map;
+        this.multiplayerNames[data.name].text.setPosition(data.pos.x - 40, data.pos.y - 40);
+        this.multiplayerNames[data.name].map = data.pos.map;
         //setTimeout(() => this.multiplayer[data.name].update(false, false, false, false), 500);
       } else {
-        //console.log('add', data.name);
-        this.multiplayer[data.name] = this.add.player(data.pos.x, data.pos.y, "atlas", "ariel-front");
-        this.multiplayer[data.name].setName(data.name);
-        this.multiplayerNames[data.name] = this.add.text(data.pos.x - 40, data.pos.y - 40, shortString(data.name));
-        //console.log({ newPlayer: this.multiplayer[data.name] });
+        if (debug) console.log('add', data.name);
+        this.createPlayer(data);
       }
     }
-  }
-
-  emitKeyboard(key) {
-    this.events.emit('keyboard', key);
-  }
-
-  getPlayerPosition() {
-    this.events.emit('player', this.player);
+    if (debug) console.log(this.multiplayer);
   }
 
   catchDoBreak() {
+    console.log('do break', !this.movable);
     this.movable = !this.movable;
   }
 
@@ -144,7 +185,7 @@ export class BaseScene extends Phaser.Scene {
     for (let i = 0; i < this.multiplayerNames.length; i++) {
       const name = Object.keys(this.multiplayerNames)[i];
       const user = this.multiplayer[name];
-      this.multiplayerNames[name].setPosition(user.x - 40, user.y - 40);
+      this.multiplayerNames[name].text.setPosition(user.x - 40, user.y - 40);
     }
 
     // Not movable? stop movement and return
@@ -160,7 +201,7 @@ export class BaseScene extends Phaser.Scene {
     let pointer = this.input.activePointer;
 
     // launch interaction between players
-    if (!this.clickOnPlayer && !pointer.primaryDown && !window.mouseOverMenu) {
+    /*if (!this.clickOnPlayer && !pointer.primaryDown && !window.mouseOverMenu) {
       let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
       for (let i = 0; i < Object.keys(this.multiplayer).length; i++) {
         const user = this.multiplayer[Object.keys(this.multiplayer)[i]];
@@ -173,7 +214,7 @@ export class BaseScene extends Phaser.Scene {
       }
     } else if (this.clickOnPlayer && pointer.primaryDown) {
       this.clickOnPlayer = false;
-    }
+    }*/
 
     if (this.player && !isMultiplayerClick && pointer.primaryDown && !window.mouseOverMenu) {
       // let pointerPosition = pointer.position;

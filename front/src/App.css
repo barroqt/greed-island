@@ -1,3 +1,8 @@
+body {
+  overflow: hidden;
+  background-color: black;
+}
+
 .App {
   text-align: center;
   position: absolute;
@@ -134,6 +139,7 @@
   bottom: 15px;
   right: 5px;
   left: 5px;
+  z-index: 2;
 }
 
 .dialogCursor {
@@ -147,6 +153,17 @@
   box-shadow: 2px 2px, 4px 2px, 2px 4px, 4px 4px, 6px 4px, 8px 4px, 2px 6px, 4px 6px, 6px 6px, 8px 6px, 10px 6px, 2px 8px, 4px 8px, 6px 8px, 8px 8px, 10px 8px, 12px 8px, 2px 10px, 4px 10px, 6px 10px, 8px 10px, 10px 10px, 2px 12px, 4px 12px, 6px 12px, 8px 12px, 2px 14px, 4px 14px;
 }
 
+.enterBtn {
+  box-shadow: none;
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  background: #f4f4f4;
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+}
+
 .questDoneIcon {
   display: inline-block;
   position: relative;
@@ -156,4 +173,38 @@
   height: 2px;
   color: #212529;
   box-shadow: 2px 2px 0 .020em, 4px 2px 0 .020em, 6px 2px 0 .020em, 8px 2px 0 .020em, 10px 2px 0 .020em, 12px 2px 0 .020em, 14px 2px 0 .020em, 18px 2px 0 .020em, 20px 2px 0 .020em, 2px 4px 0 .020em, 16px 4px 0 .020em, 18px 4px 0 .020em, 20px 4px 0 .020em, 2px 6px 0 .020em, 14px 6px 0 .020em, 16px 6px 0 .020em, 2px 8px 0 .020em, 4px 8px 0 .020em, 12px 8px 0 .020em, 14px 8px 0 .020em, 2px 10px 0 .020em, 4px 10px 0 .020em, 6px 10px 0 .020em, 10px 10px 0 .020em, 12px 10px 0 .020em, 16px 10px 0 .020em, 2px 12px 0 .020em, 6px 12px 0 .020em, 8px 12px 0 .020em, 10px 12px 0 .020em, 16px 12px 0 .020em, 2px 14px 0 .020em, 8px 14px 0 .020em, 16px 14px 0 .020em, 2px 16px 0 .020em, 4px 16px 0 .020em, 6px 16px 0 .020em, 8px 16px 0 .020em, 10px 16px 0 .020em, 12px 16px 0 .020em, 14px 16px 0 .020em, 16px 16px 0 .020em;
+}
+
+.loaderInGame {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 5px;
+  background: #f0f0f0;
+  width: fit-content;
+  border-radius: 10px;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.linkDialog {
+  font-size: 13px;
+  color: #3196d9;
+  display: block;
+  margin-top: 20px;
+}
+
+.btnDialog {
+  border: 1px solid black;
+  padding: 5px;
+  width: fit-content;
+  margin: auto;
+  border-radius: 4px;
+}
+
+.btnDialog.selected {
+  border: 1px solid #f28613;
+  color: #f28613;
 }

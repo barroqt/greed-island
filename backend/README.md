@@ -17,6 +17,10 @@ pnpm install
 ### 2. Set Up the Database
 
 a. Install PostgreSQL if you haven't already.
+    a1: for mac: - get it there https://postgresapp.com/downloads.html
+                 - with the app, launch terminal on your db
+                 - create database: see below
+                 - create user: CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword';
 
 b. Create a new database for the project:
 

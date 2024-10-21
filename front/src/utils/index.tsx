@@ -175,3 +175,31 @@ export const levelDisplay = (xp: number, coef: number, max?: number) => {
     const res = parseInt((coef * Math.log(xp)) + '');
     return max && res > max ? max : res;
 };
+
+export const makeid = (length: number) => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+export const replaceParametersInUrl = (url: string, params: { [key: string]: string }) => {
+    var newObj: { [key: string]: string } = {};
+    Object.keys(params).forEach(function (key) {
+        newObj[':' + key] = params[key];
+    });
+
+    var regex = new RegExp(Object.keys(newObj).join('|'), 'gi');
+    return url.replace(regex, function (matched) {
+        return newObj[matched];
+    });
+}
+
+// get index in a loopable options scenario
+export const getKeyChained = (totalSize: number, nextOne: number, current: number) => {
+    if (nextOne > 0) { return (current + nextOne) % totalSize; }
+    return (current + nextOne) < 0 ? totalSize + nextOne : current + nextOne;
+}
